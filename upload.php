@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <title>Document</title>
 </head>
 <body>
@@ -19,12 +20,12 @@ if($_FILES){
 
 
     if($_FILES["uploadedName"]["error"] != 0){
-        echo "Chyba serveru";
+        echo "Chyba serveru ";
         $uploadSuccess = false;
     }
 
     elseif(file_exists($targetFile)) {
-        echo "Soubor již existuje";
+        echo "Soubor již existuje ";
         $uploadSuccess = false;
     }
 
@@ -50,6 +51,9 @@ if($_FILES){
             elseif($fileType == "mp4"){
                 echo "<video controls><source src='uploads/{$_FILES["uploadedName"]["name"]}'></video>";
             }
+            elseif($fileType == "mp3"){
+                echo "<audio controls><source src='uploads/{$_FILES["uploadedName"]["name"]}'></audio>";
+            }
         }
     }
 
@@ -58,10 +62,11 @@ if($_FILES){
 
 ?>
 <form method="post" action="" enctype="multipart/form-data">
-    <div>
-        Select image to upload:
-        <input type="file" name="uploadedName">
-        <input type="submit" value="Nahrát" name="submit">
+    <div class="mb-3">
+        <label class="form-label">Select image to upload:</label>
+        <input type="file" name="uploadedName" class="form-control" >
+        <br>
+        <input type="submit" value="Nahrát" name="submit" class="btn btn-primary mb-3">
     </div>
 </form>
 
